@@ -124,6 +124,12 @@ vim.opt.breakindent = true
 -- Save undo history
 vim.opt.undofile = true
 
+-- TY UNDO
+vim.opt.undolevels = 100
+
+-- Increase undo memory limit in kilobytes
+vim.opt.undoreload = 1000
+
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -163,6 +169,36 @@ vim.opt.scrolloff = 15
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- TY SPECIFIC BINDINGS...
+-- Map Alt + i to Insert mode
+-- vim.keymap.set('n', '<A-i>', 'i', { desc = 'Alt to insert' })
+
+-- Map Alt + n to Normal mode (from Insert mode)
+vim.keymap.set('i', '<A-n>', '<Esc>', { desc = 'Alt to normal normal' })
+
+-- Ctrl + s to save
+vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = 'Lazy Ctrl-S Save' })
+
+-- Ctrl + s save in normal mode
+vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>', { desc = 'Lazy Ctrl-S Save' })
+
+-- Ctrl + z to undo in Insert mode
+vim.keymap.set('i', '<C-z>', '<Esc>u', { desc = 'Undo last action in insert mode' })
+
+-- Ctrl + z to undo in Normal mode
+vim.keymap.set('n', '<C-z>', 'u', { desc = 'Undo last action' })
+
+-- Map D to delete to the 'd' register
+vim.keymap.set('n', 'D', '"dD', { desc = 'Delete to register d' })
+
+-- Map x to delete a character to the 'd' register
+vim.keymap.set('n', 'x', '"dx', { desc = 'Delete character to register d' })
+
+-- Map dd to delete the current line to the 'd' register
+vim.keymap.set('n', 'dd', '"ddd', { desc = 'Delete line to register d' })
+
+-- END TY SPECIFIC BINDINGS...
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
